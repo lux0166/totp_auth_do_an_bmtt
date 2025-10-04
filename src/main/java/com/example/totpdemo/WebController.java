@@ -57,10 +57,9 @@ public class WebController {
                 .issuer(issuer)
                 .build();
 
-        QrGenerator generator = new ZxingPngQrGenerator();
         String qrCodeImage;
         try {
-            qrCodeImage = getDataUriForImage(generator.generate(data), generator.getImageMimeType());
+            qrCodeImage = getDataUriForImage(qrGenerator.generate(data), qrGenerator.getImageMimeType());
         } catch (QrGenerationException e) {
             model.addAttribute("error", "Failed to generate QR code");
             return "register";
