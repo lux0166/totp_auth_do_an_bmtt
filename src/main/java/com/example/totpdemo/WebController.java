@@ -25,6 +25,9 @@ public class WebController {
     @Autowired
     private CodeVerifier codeVerifier;
 
+    @Value("${totp.issuer}")
+    private String issuer;
+
     @GetMapping("/")
     public String index() {
         return "index";
