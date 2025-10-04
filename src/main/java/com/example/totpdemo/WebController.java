@@ -8,6 +8,7 @@ import dev.samstevens.totp.qr.ZxingPngQrGenerator;
 import dev.samstevens.totp.secret.DefaultSecretGenerator;
 import dev.samstevens.totp.secret.SecretGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,7 +84,6 @@ public class WebController {
             return "login";
         }
 
-        // Store username in session or pass to next step
         model.addAttribute("username", username);
         return "verify-totp";
     }
@@ -102,7 +102,6 @@ public class WebController {
             return "verify-totp";
         }
 
-        // Mark MFA as enabled after first successful verification
         user.setMfaEnabled(true);
         return "success";
     }
