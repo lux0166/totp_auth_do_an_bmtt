@@ -4,8 +4,6 @@ import dev.samstevens.totp.code.CodeVerifier;
 import dev.samstevens.totp.exceptions.QrGenerationException;
 import dev.samstevens.totp.qr.QrData;
 import dev.samstevens.totp.qr.QrGenerator;
-import dev.samstevens.totp.qr.ZxingPngQrGenerator;
-import dev.samstevens.totp.secret.DefaultSecretGenerator;
 import dev.samstevens.totp.secret.SecretGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +23,12 @@ public class WebController {
 
     @Autowired
     private CodeVerifier codeVerifier;
+
+    @Autowired
+    private SecretGenerator secretGenerator;
+
+    @Autowired
+    private QrGenerator qrGenerator;
 
     @Value("${totp.issuer}")
     private String issuer;
@@ -46,7 +50,6 @@ public class WebController {
             return "register";
         }
 
-        SecretGenerator secretGenerator = new DefaultSecretGenerator();
         String secret = secretGenerator.generate();
 
         userService.registerUser(username, password, secret);
