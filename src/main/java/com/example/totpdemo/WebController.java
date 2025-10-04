@@ -50,7 +50,7 @@ public class WebController {
         QrData data = new QrData.Builder()
                 .label(username)
                 .secret(secret)
-                .issuer("TOTP Demo App")
+                .issuer(issuer)
                 .build();
 
         QrGenerator generator = new ZxingPngQrGenerator();
